@@ -1,0 +1,48 @@
+var app = angular.module('app',[]);
+
+app.directive('myWebComponent', function(){
+  return {
+    //...
+    bindToController: {
+      // the API object you can bind to from the outside
+      api: '='
+    },
+    template: ...,
+    controller: function(){
+      var vm = this;
+      ...
+
+      // the API of my web component
+      vm.api = {
+        setPerson: function(newPerson){
+          vm.person = newPerson;
+        }
+      };
+    },
+    //...
+  };
+});
+
+/*
+<div ng-controller="MainController as main">
+  <my-web-component api="main.webComponentApi"></my-web-component>
+  ...
+  <button ng-click="main.changePerson()">Change person</button>
+</div>
+
+
+*/
+
+
+app.controller('MainController', function(){
+  var vm = this;
+  // this will be bound to the API object
+  vm.webComponentApi = null;
+
+  vm.changePerson = function(){
+    // Invoke the api which at this point should be bound
+    vm.webComponentApi.setPerson({
+        name: 'Juri'
+      });
+  };
+});
