@@ -1,1 +1,4 @@
 angular.element(document.body).injector().get(SERVICE)
+
+//exemple
+angular.element(document.body).injector().get('$state').get().map(function(o){console.log(o.name)})
